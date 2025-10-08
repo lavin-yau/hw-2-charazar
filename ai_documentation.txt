@@ -1,0 +1,92 @@
+Claude AI Support
+
+Input: How to add a git-tag to repostiory 
+
+Output: # Create a tag (lightweight)
+git tag v1.0
+
+# Or create an annotated tag (recommended - includes message)
+git tag -a v1.0 -m "Initial release with selected data files"
+
+# Push the tag to GitHub
+git push origin v1.0
+
+# Or push all tags at once
+git push origin --tags
+
+My process: I tried to tweak some of the code and realized I need to commit the whole folder first. 
+
+Input: How to create environment named "ligo" and install the dependencies
+
+Output: 
+name: ligo
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - jupyterlab
+  - numpy
+  - pandas
+  - matplotlib
+  - scipy
+  - ipykernel
+  - pip
+  - pip:
+      - git+https://github.com/username/repository-name.git
+🧠 Explanation
+name: ligo → names your environment “ligo”.
+
+channels: → tells conda where to look for packages.
+
+dependencies: → lists the Python version and packages your notebook needs.
+
+The pip: section is optional — you can include:
+
+git+https://github.com/... if your notebook depends on another GitHub repo.
+
+or other pip-only packages.
+
+My Process: I went into the READ me and figured out which packages I needed and applied those to this code structure. I used the imports from the tutorial notebook. I then needed to figure out how to make the environment run the code. 
+
+Input: how do i run code in the environment file 
+
+Output: 
+To confirm it exists:
+
+conda env list
+
+⚙️ Step 2: Add the environment to Jupyter as a kernel
+
+Activate it first:
+
+conda activate ligo
+
+
+Then register it with Jupyter:
+
+python -m ipykernel install --user --name ligo --display-name "Python (ligo)"
+
+My Process: I ran these commands. 
+
+Input: how to remove the 3rd revision number
+
+Output: 
+name: ligo
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - numpy=1.26
+  - pandas=2.2
+  - matplotlib=3.9
+  - scipy=1.13
+  - jupyterlab
+  - pip
+
+then I ran
+
+conda env remove -n ligo
+conda env create -f environment.yml
+
+Process: I used this and it worked along with my own additional trouble shooting 
